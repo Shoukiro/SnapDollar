@@ -131,3 +131,9 @@ main {
   text-decoration: none;
   font-weight: bold;
 }
+.poll-embed {
+  margin: 20px 0;
+  background: #EBEDDF;
+  border-radius: 10px;
+  overflow: hidden;
+}
