@@ -1,73 +1,76 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
+<!DOCTYPE html><html lang="en"><head>
   <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>$NAPDOLLAR</title>
   <link rel="stylesheet" href="style.css" />
-</head>
-<body>
+</head><body>
   <header>
     <h1 class="site-title">$NAPDOLLAR</h1>
     <div class="top-bar">
-      <button id="menu-button">☰</button>
-      <input type="text" id="search-bar" placeholder="Search...">
+      <button id="menu-toggle">☰</button>
+      <input type="text" id="search-input" placeholder="Search topics..." />
       <button id="view-bookmarks">View Bookmarks</button>
     </div>
-  </header>
-
-  <main id="content-area">
+  </header>  <nav id="menu">
+    <ul>
+      <li><a href="#">Privacy Policy</a></li>
+      <li><a href="#">Contact</a></li>
+      <li><a href="#">About</a></li>
+      <li><a href="#">Terms & Conditions</a></li>
+    </ul>
+  </nav>  <main id="content">
     <!-- Day 1 -->
-    <div class="content-box" onclick="toggleContent(this)">
+    <div class="content-box" data-topic="How to Start a Business">
       <div class="content-header">
-        <h2>How to Start a Business from Zero</h2>
-        <button class="bookmark-btn" onclick="toggleBookmark(this, event)">🔖</button>
+        <h2>How to Start a Business</h2>
+        <span class="bookmark-btn">★</span>
       </div>
       <div class="content-body">
         <ul>
-          <li><strong>Find a Problem to Solve</strong><br>Look around—what do people need or struggle with? Your solution = your business.</li>
-          <li><strong>Validate Your Idea</strong><br>Talk to potential customers. Ask: Would you pay for this? Start small—test before going all in.</li>
-          <li><strong>Make a Simple Plan</strong><br>What are you selling? Who are you selling to? How will you make money? What are your startup costs?</li>
-          <li><strong>Choose a Business Name & Identity</strong><br>Pick a name that’s easy to remember. Get a logo, brand colors, and a basic online presence (website or Instagram page).</li>
-          <li><strong>Register Your Business</strong><br>Choose your structure (sole proprietorship, LLC, etc.). Get necessary licenses, tax IDs, or permits.</li>
-          <li><strong>Set Up Finances</strong><br>Open a separate business bank account. Use tools to track income/expenses.</li>
-          <li><strong>Start Selling</strong><br>Use social media, word of mouth, online platforms. Offer real value, not just hype.</li>
-          <li><strong>Keep Improving</strong><br>Collect feedback. Tweak your product. Stay consistent.</li>
+          <li><strong>Find a Problem to Solve</strong><br> Look around—what do people need or struggle with? Your solution = your business.</li>
+          <li><strong>Validate Your Idea</strong><br> Talk to potential customers. Ask: Would you pay for this? Start small—test before going all in.</li>
+          <li><strong>Make a Simple Plan</strong><br> What are you selling? Who are you selling to? How will you make money? What are your startup costs?</li>
+          <li><strong>Choose a Business Name & Identity</strong><br> Pick a name that’s easy to remember. Get a logo, brand colors, and a basic online presence.</li>
+          <li><strong>Register Your Business</strong><br> Choose your structure (sole proprietorship, LLC, etc.). Get licenses, tax IDs, or permits.</li>
+          <li><strong>Set Up Finances</strong><br> Open a business bank account. Use Google Sheets or apps to track expenses.</li>
+          <li><strong>Start Selling</strong><br> Focus on getting your first customer. Use social media, word of mouth, or ads.</li>
+          <li><strong>Keep Improving</strong><br> Collect feedback. Tweak your product. Stay consistent and learn as you go.</li>
         </ul>
-        <div class="conclusion">Tip: Don’t wait to be perfect. Start small. Learn fast. Grow smart.</div>
+        <div class="conclusion">
+          <strong>Tip:</strong> Don’t wait to be perfect. Start small. Learn fast. Grow smart.
+        </div>
       </div>
+    </div><!-- Poll -->
+<div class="poll-link">
+  <a href="https://strawpoll.com/Q0Zp7Od6GgM" target="_blank">Vote in Today's Poll</a>
+</div>
+
+<!-- Day 2 -->
+<div class="content-box" data-topic="Loan Advice from Millionaires">
+  <div class="content-header">
+    <h2>Loan Advice from Millionaires</h2>
+    <span class="bookmark-btn">★</span>
+  </div>
+  <div class="content-body">
+    <ul>
+      <li>Debt is a tool. Use it to build, not to consume.</li>
+      <li>If the loan doesn’t create income, you’re paying to get poorer.</li>
+      <li>Smart people let borrowed money work harder than their own money.</li>
+      <li>Leverage grows wealth—but only with discipline.</li>
+      <li>Never take a loan to look rich. Take one to get rich.</li>
+      <li>Business loans are for multiplying, not spending.</li>
+      <li>Bad debt takes money. Good debt makes money.</li>
+      <li>Borrow for machines, not for mansions.</li>
+      <li>Poor borrow to survive. Rich borrow to scale.</li>
+      <li>Each rupee borrowed must earn more than its interest.</li>
+      <li>Income-generating loan = investment. Lifestyle loan = trap.</li>
+      <li>Smart loans replace your time with systems.</li>
+      <li>Don’t fear debt. Fear not knowing how to use it.</li>
+    </ul>
+    <div class="conclusion">
+      <strong>In nutshell:</strong> Credit is power—only if you use it with a plan.
     </div>
+  </div>
+</div>
 
-    <!-- Strawpoll -->
-    <iframe src="https://strawpoll.com/Q0Zp7Od6GgM" class="poll-frame" frameborder="0" allowfullscreen></iframe>
-
-    <!-- Day 2 -->
-    <div class="content-box" onclick="toggleContent(this)">
-      <div class="content-header">
-        <h2>Loan Advice from Millionaires</h2>
-        <button class="bookmark-btn" onclick="toggleBookmark(this, event)">🔖</button>
-      </div>
-      <div class="content-body">
-        <ul>
-          <li>Debt is a tool. Use it to build, not to consume.</li>
-          <li>If the loan doesn’t create income, you’re paying to get poorer.</li>
-          <li>Let borrowed money work harder than your own money.</li>
-          <li>Leverage helps the rich grow—but only with discipline.</li>
-          <li>Don’t take a loan to look rich—take it to get rich.</li>
-          <li>Business loans are for multiplying, not spending.</li>
-          <li>Good debt puts money in; bad debt takes it out.</li>
-          <li>Borrow for machines, not for mansions.</li>
-          <li>Poor use loans to survive. Rich use them to scale.</li>
-          <li>Every borrowed rupee must earn more than its interest.</li>
-          <li>If your loan builds income, it’s an investment. Else, it’s a trap.</li>
-          <li>The smartest loan replaces your time with systems.</li>
-          <li>Don’t fear debt. Fear misusing it.</li>
-        </ul>
-        <div class="conclusion">In nutshell: Credit is power—only if you use it with a plan.</div>
-      </div>
-    </div>
-  </main>
-
-  <script src="script.js"></script>
-</body>
-</html>
+  </main>  <script src="script.js"></script></body></html>
