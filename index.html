@@ -49,17 +49,33 @@
       padding: 20px;
       border-radius: 10px;
       cursor: pointer;
-      max-height: 50px;
       overflow: hidden;
       transition: all 0.5s ease;
     }
-    .content-box.open {
-      max-height: 1000px;
-      opacity: 1;
-    }
-    .conclusion {
-      margin-top: 15px;
+    .content-header {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
       font-weight: bold;
+      font-size: 1.2rem;
+    }
+    .bookmark-icon {
+      background: none;
+      border: none;
+      font-size: 1.2rem;
+      cursor: pointer;
+      color: gray;
+    }
+    .bookmark-icon.active {
+      color: black;
+    }
+    .content-body {
+      max-height: 0;
+      overflow: hidden;
+      transition: max-height 0.5s ease;
+    }
+    .content-box.open .content-body {
+      max-height: 2000px;
     }
     .poll {
       text-align: center;
@@ -77,16 +93,51 @@
   </div>  <script>
     const contentFiles = ["day1.html", "day2.html"];
     const container = document.getElementById("contentContainer");
+    const bookmarks = [];
+
+    function createContentBox(title, bodyContent, filename) {
+      const box = document.createElement("div");
+      box.className = "content-box";
+
+      const header = document.createElement("div");
+      header.className = "content-header";
+      header.innerHTML = `<span>${title}</span>`;
+
+      const bookmarkBtn = document.createElement("button");
+      bookmarkBtn.className = "bookmark-icon";
+      bookmarkBtn.textContent = "★";
+
+      bookmarkBtn.addEventListener("click", (e) => {
+        e.stopPropagation();
+        bookmarkBtn.classList.toggle("active");
+        if (bookmarkBtn.classList.contains("active")) {
+          bookmarks.push(box.cloneNode(true));
+        }
+      });
+
+      header.appendChild(bookmarkBtn);
+
+      const body = document.createElement("div");
+      body.className = "content-body";
+      body.innerHTML = bodyContent;
+
+      box.appendChild(header);
+      box.appendChild(body);
+
+      box.addEventListener("click", () => {
+        box.classList.toggle("open");
+      });
+
+      return box;
+    }
 
     contentFiles.forEach((file, index) => {
       fetch(`content/${file}`)
         .then(res => res.text())
         .then(data => {
-          const box = document.createElement("div");
-          box.className = "content-box";
-          box.innerHTML = data;
-          box.addEventListener("click", () => box.classList.toggle("open"));
-          container.appendChild(box);
+          const title = data.split("\n")[0].replace(/<[^>]*>/g, "").trim();
+          const contentBox = createContentBox(title, data, file);
+          container.appendChild(contentBox);
 
           if (index < contentFiles.length - 1) {
             const poll = document.createElement("div");
