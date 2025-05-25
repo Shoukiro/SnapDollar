@@ -6,54 +6,40 @@
   <title>$NAPDOLLAR</title>
   <link rel="stylesheet" href="style.css" />
 </head>
-<body>
-  <!-- Title at the top -->
-  <h1 style="color: #EBEDDF; text-align: center; font-size: 2em; margin-top: 10px;">$NAPDOLLAR</h1>
+<body style="background: linear-gradient(to bottom, #75485E, #51A3A3); font-family: Arial, sans-serif; margin: 0; padding: 0;">
 
-  <!-- Top bar -->
-  <div class="top-bar">
-    <button id="menu-btn">☰</button>
-    <input type="text" id="search-bar" placeholder="Search topics..." />
-    <button id="view-bookmarks-btn">View Bookmarks</button>
+  <!-- Top Title -->
+  <h1 style="color: #EBEDDF; text-align: center; font-size: 2em; padding: 15px 0; margin: 0;">$NAPDOLLAR</h1>
+
+  <!-- Top Bar -->
+  <div style="display: flex; align-items: center; justify-content: space-between; padding: 10px 20px;">
+    <button id="menu-btn" style="background: none; border: none; font-size: 24px; color: #EBEDDF;">☰</button>
+    <input type="text" id="search-bar" placeholder="Search topics..." style="flex: 1; margin: 0 10px; padding: 8px; border-radius: 5px; border: none;">
+    <button id="view-bookmarks-btn" style="background-color: #EBEDDF; color: black; padding: 8px 12px; border: none; border-radius: 5px;">View Bookmarks</button>
   </div>
 
-  <!-- Menu bar -->
-  <div id="menu" class="menu hidden">
-    <ul>
-      <li><a href="#">Privacy Policy</a></li>
-      <li><a href="#">Contact</a></li>
-      <li><a href="#">About</a></li>
-      <li><a href="#">Terms & Conditions</a></li>
+  <!-- Menu Panel -->
+  <div id="menu" style="display: none; padding: 10px 20px;">
+    <ul style="list-style: none; padding: 0; margin: 0; color: #EBEDDF;">
+      <li><a href="#" style="color: #EBEDDF;">Privacy Policy</a></li>
+      <li><a href="#" style="color: #EBEDDF;">Contact</a></li>
+      <li><a href="#" style="color: #EBEDDF;">About</a></li>
+      <li><a href="#" style="color: #EBEDDF;">Terms & Conditions</a></li>
     </ul>
   </div>
 
-  <!-- Bookmarks view -->
-  <div id="bookmarks-container" class="hidden"></div>
+  <!-- Bookmarks Section -->
+  <div id="bookmarks-container" style="display: none; padding: 20px;"></div>
 
-  <!-- Content section -->
-  <div id="content-container">
-    <!-- Content boxes will be dynamically inserted here by JavaScript -->
+  <!-- Content Container -->
+  <div id="content-container" style="padding: 20px;"></div>
+
+  <!-- Strawpoll Embed -->
+  <div style="padding: 20px; text-align: center;">
+    <iframe src="https://strawpoll.com/embed/Q0Zp7Od6GgM" style="width: 100%; height: 300px; border: none;" allowfullscreen></iframe>
   </div>
 
-  <!-- Script -->
+  <!-- JavaScript -->
   <script src="script.js"></script>
 </body>
 </html>
-<div id="content-container">
-  <!-- Dynamic content will load here -->
-</div>
-<script>
-  const files = ["day1", "day2", "day3"]; // Update this list daily
-
-  const container = document.getElementById("content-container");
-
-  files.forEach(file => {
-    fetch(`topics/${file}.html`)
-      .then(res => res.text())
-      .then(html => {
-        const div = document.createElement('div');
-        div.innerHTML = html;
-        container.appendChild(div);
-      });
-  });
-</script>
