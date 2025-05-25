@@ -1,45 +1,102 @@
-<!DOCTYPE html>
-<html lang="en">
+<!-- index.html --><!DOCTYPE html><html lang="en">
 <head>
   <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>$NAPDOLLAR</title>
-  <link rel="stylesheet" href="style.css" />
+  <style>
+    body {
+      margin: 0;
+      padding: 0;
+      font-family: Arial, sans-serif;
+      background: linear-gradient(180deg, #75485E, #51A3A3);
+      color: #000;
+    }
+    header {
+      background-color: transparent;
+      padding: 20px;
+      text-align: center;
+      font-size: 2rem;
+      color: #EBEDDF;
+      font-weight: bold;
+    }
+    .top-bar {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      padding: 10px 20px;
+    }
+    .menu, .bookmark-btn {
+      background-color: #EBEDDF;
+      padding: 10px;
+      border: none;
+      cursor: pointer;
+      font-weight: bold;
+    }
+    .search-input {
+      width: 40%;
+      padding: 10px;
+      border-radius: 5px;
+      border: 1px solid #ccc;
+    }
+    .container {
+      max-width: 900px;
+      margin: 0 auto;
+      padding: 20px;
+    }
+    .content-box {
+      background-color: #EBEDDF;
+      margin-bottom: 20px;
+      padding: 20px;
+      border-radius: 10px;
+      cursor: pointer;
+      max-height: 50px;
+      overflow: hidden;
+      transition: all 0.5s ease;
+    }
+    .content-box.open {
+      max-height: 1000px;
+      opacity: 1;
+    }
+    .conclusion {
+      margin-top: 15px;
+      font-weight: bold;
+    }
+    .poll {
+      text-align: center;
+      margin: 20px 0;
+    }
+  </style>
 </head>
-<body style="background: linear-gradient(to bottom, #75485E, #51A3A3); font-family: Arial, sans-serif; margin: 0; padding: 0;">
+<body>
+  <header>$NAPDOLLAR</header>  <div class="top-bar">
+    <button class="menu">Menu</button>
+    <input type="text" class="search-input" placeholder="Search topics..." />
+    <button class="bookmark-btn">View Bookmarks</button>
+  </div>  <div class="container" id="contentContainer">
+    <!-- Content will be dynamically loaded here -->
+  </div>  <script>
+    const contentFiles = ["day1.html", "day2.html"];
+    const container = document.getElementById("contentContainer");
 
-  <!-- Top Title -->
-  <h1 style="color: #EBEDDF; text-align: center; font-size: 2em; padding: 15px 0; margin: 0;">$NAPDOLLAR</h1>
+    contentFiles.forEach((file, index) => {
+      fetch(`content/${file}`)
+        .then(res => res.text())
+        .then(data => {
+          const box = document.createElement("div");
+          box.className = "content-box";
+          box.innerHTML = data;
+          box.addEventListener("click", () => box.classList.toggle("open"));
+          container.appendChild(box);
 
-  <!-- Top Bar -->
-  <div style="display: flex; align-items: center; justify-content: space-between; padding: 10px 20px;">
-    <button id="menu-btn" style="background: none; border: none; font-size: 24px; color: #EBEDDF;">☰</button>
-    <input type="text" id="search-bar" placeholder="Search topics..." style="flex: 1; margin: 0 10px; padding: 8px; border-radius: 5px; border: none;">
-    <button id="view-bookmarks-btn" style="background-color: #EBEDDF; color: black; padding: 8px 12px; border: none; border-radius: 5px;">View Bookmarks</button>
-  </div>
-
-  <!-- Menu Panel -->
-  <div id="menu" style="display: none; padding: 10px 20px;">
-    <ul style="list-style: none; padding: 0; margin: 0; color: #EBEDDF;">
-      <li><a href="#" style="color: #EBEDDF;">Privacy Policy</a></li>
-      <li><a href="#" style="color: #EBEDDF;">Contact</a></li>
-      <li><a href="#" style="color: #EBEDDF;">About</a></li>
-      <li><a href="#" style="color: #EBEDDF;">Terms & Conditions</a></li>
-    </ul>
-  </div>
-
-  <!-- Bookmarks Section -->
-  <div id="bookmarks-container" style="display: none; padding: 20px;"></div>
-
-  <!-- Content Container -->
-  <div id="content-container" style="padding: 20px;"></div>
-
-  <!-- Strawpoll Embed -->
-  <div style="padding: 20px; text-align: center;">
-    <iframe src="https://strawpoll.com/embed/Q0Zp7Od6GgM" style="width: 100%; height: 300px; border: none;" allowfullscreen></iframe>
-  </div>
-
-  <!-- JavaScript -->
-  <script src="script.js"></script>
-</body>
+          if (index < contentFiles.length - 1) {
+            const poll = document.createElement("div");
+            poll.className = "poll";
+            poll.innerHTML = `
+              <iframe src="https://strawpoll.com/embed/Q0Zp7Od6GgM" style="width: 100%; height: 400px; border: none;">Loading poll...</iframe>
+            `;
+            container.appendChild(poll);
+          }
+        });
+    });
+  </script></body>
 </html>
