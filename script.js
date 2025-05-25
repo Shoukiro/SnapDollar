@@ -1,75 +1,34 @@
-const contentData = [
-  {
-    title: "Start a Business in 8 Simple Steps",
-    body: `
-    <ul>
-      <li><strong>1. Find a Problem to Solve</strong><br>Look around—what do people need or struggle with?<br>Your solution = your business.</li>
-      <li><strong>2. Validate Your Idea</strong><br>Talk to potential customers.<br>Ask: Would you pay for this?</li>
-      <li><strong>3. Make a Simple Plan</strong><br>What are you selling?<br>Who are you selling to?<br>How will you make money?</li>
-      <li><strong>4. Choose a Business Name & Identity</strong><br>Pick a name that’s easy to remember.<br>Get a logo, colors, and presence.</li>
-      <li><strong>5. Register Your Business</strong><br>Choose your structure and get required licenses.</li>
-      <li><strong>6. Set Up Finances</strong><br>Separate account, track expenses, maybe use accounting software.</li>
-      <li><strong>7. Start Selling</strong><br>Use social, ads, and offer real value.</li>
-      <li><strong>8. Keep Improving</strong><br>Collect feedback. Tweak and grow.</li>
-    </ul>
-    <div><strong>Tip:</strong> Don’t wait to be perfect. Start small. Learn fast. Grow smart.</div>
-    `
+// script.js
+
+document.addEventListener("DOMContentLoaded", function () { const boxes = document.querySelectorAll(".content-box"); const bookmarks = JSON.parse(localStorage.getItem("bookmarks")) || []; const bookmarkBtnMap = new Map();
+
+boxes.forEach((box, index) => { const header = box.querySelector(".content-header"); const bookmarkBtn = box.querySelector(".bookmark-btn"); const topic = box.dataset.topic; const body = box.querySelector(".content-body");
+
+bookmarkBtnMap.set(topic, box.outerHTML);
+
+if (bookmarks.includes(topic)) {
+  bookmarkBtn.classList.add("bookmarked");
+}
+
+header.addEventListener("click", () => {
+  box.classList.toggle("expanded");
+});
+
+bookmarkBtn.addEventListener("click", (e) => {
+  e.stopPropagation();
+  if (bookmarks.includes(topic)) {
+    bookmarks.splice(bookmarks.indexOf(topic), 1);
+    bookmarkBtn.classList.remove("bookmarked");
+  } else {
+    bookmarks.push(topic);
+    bookmarkBtn.classList.add("bookmarked");
   }
-];
-
-const contentContainer = document.getElementById("content-container");
-const bookmarksContainer = document.getElementById("bookmarks-container");
-const searchBar = document.getElementById("search-bar");
-const viewBookmarksBtn = document.getElementById("view-bookmarks-btn");
-const menuBtn = document.getElementById("menu-btn");
-const menu = document.getElementById("menu");
-
-let bookmarks = [];
-
-function createContentBox(item) {
-  const box = document.createElement("div");
-  box.className = "content-box";
-  box.innerHTML = `<h3>${item.title}</h3><div class="content" style="display: none;">${item.body}</div><button class="bookmark-btn">Add to Bookmark</button>`;
-  
-  const content = box.querySelector(".content");
-  const btn = box.querySelector(".bookmark-btn");
-
-  box.addEventListener("click", function (e) {
-    if (e.target !== btn) {
-      box.classList.toggle("open");
-      content.style.display = box.classList.contains("open") ? "block" : "none";
-    }
-  });
-
-  btn.addEventListener("click", function (e) {
-    e.stopPropagation();
-    btn.classList.toggle("active");
-    if (btn.classList.contains("active")) {
-      btn.textContent = "Bookmarked";
-      bookmarks.push(box.outerHTML);
-    } else {
-      btn.textContent = "Add to Bookmark";
-      bookmarks = bookmarks.filter(b => !b.includes(item.title));
-    }
-  });
-
-  return box;
-}
-
-function renderContent() {
-  contentData.forEach(item => {
-    const box = createContentBox(item);
-    contentContainer.appendChild(box);
-  });
-}
-
-viewBookmarksBtn.addEventListener("click", () => {
-  bookmarksContainer.innerHTML = bookmarks.join("");
-  bookmarksContainer.classList.toggle("hidden");
+  localStorage.setItem("bookmarks", JSON.stringify(bookmarks));
 });
 
-menuBtn.addEventListener("click", () => {
-  menu.classList.toggle("hidden");
 });
 
-renderContent();
+document.getElementById("view-bookmarks").addEventListener("click", () => { const main = document.querySelector("main"); main.innerHTML = ""; bookmarks.forEach(topic => { main.innerHTML += bookmarkBtnMap.get(topic) || ""; }); });
+
+document.getElementById("search-bar").addEventListener("input", function () { const value = this.value.toLowerCase(); boxes.forEach((box) => { const topic = box.dataset.topic.toLowerCase(); if (topic.includes(value)) { box.style.display = "block"; } else { box.style.display = "none"; } }); }); });
+
