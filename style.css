@@ -1,72 +1,75 @@
-body {
-  font-family: Arial, sans-serif;
-  background: linear-gradient(135deg, #75485E, #51A3A3);
-  margin: 0;
-  padding: 0;
-  color: black;
-}
-
-header {
+.top-bar {
   display: flex;
   align-items: center;
   justify-content: space-between;
-  background: #EBEDDF;
   padding: 10px 20px;
 }
 
-.site-name {
-  color: #EBEDDF;
-  background-color: black;
-  padding: 5px 15px;
+.top-bar input {
+  flex: 1;
+  margin: 0 10px;
+  padding: 8px;
+  border-radius: 5px;
+  border: none;
+}
+
+.top-bar button {
+  background-color: #EBEDDF;
+  color: black;
+  padding: 8px 12px;
+  border: none;
   border-radius: 5px;
 }
 
-.menu {
-  font-size: 24px;
-  cursor: pointer;
+.menu ul {
+  list-style: none;
+  padding: 0;
+  margin: 0;
 }
 
-#searchBar {
-  flex-grow: 1;
-  margin: 0 15px;
-  padding: 8px;
+.menu ul li a {
+  color: #EBEDDF;
+  text-decoration: none;
+  display: block;
+  padding: 5px 0;
 }
 
 .content-box {
   background-color: #EBEDDF;
-  margin: 20px;
+  color: black;
+  margin: 20px 10px;
   padding: 20px;
   border-radius: 10px;
+  cursor: pointer;
+  transition: max-height 0.7s ease, opacity 0.7s ease;
+  overflow: hidden;
+  max-height: 80px;
 }
 
-.content-box button {
-  margin-bottom: 10px;
+.content-box.open {
+  max-height: 1000px;
+  opacity: 1;
 }
 
-.poll {
-  margin: 20px;
-}
-
-.conclusion {
+.bookmark-btn {
+  background-color: transparent;
+  color: black;
+  border: 1px solid black;
+  padding: 5px 10px;
+  border-radius: 5px;
+  cursor: pointer;
   margin-top: 10px;
-  font-weight: bold;
-  background: #D6D6C2;
-  padding: 10px;
-  border-left: 5px solid #333;
 }
 
-/* Modal */
-.modal {
-  position: fixed;
-  top: 10%;
-  left: 10%;
-  width: 80%;
-  background: white;
-  border: 2px solid black;
-  padding: 20px;
-  z-index: 1000;
+.bookmark-btn.active {
+  background-color: black;
+  color: white;
 }
 
 .hidden {
   display: none;
+}
+
+.poll {
+  padding: 20px;
 }
