@@ -1,153 +1,73 @@
-<!-- index.html --><!DOCTYPE html><html lang="en">
+<!DOCTYPE html>
+<html lang="en">
 <head>
   <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
   <title>$NAPDOLLAR</title>
-  <style>
-    body {
-      margin: 0;
-      padding: 0;
-      font-family: Arial, sans-serif;
-      background: linear-gradient(180deg, #75485E, #51A3A3);
-      color: #000;
-    }
-    header {
-      background-color: transparent;
-      padding: 20px;
-      text-align: center;
-      font-size: 2rem;
-      color: #EBEDDF;
-      font-weight: bold;
-    }
-    .top-bar {
-      display: flex;
-      justify-content: space-between;
-      align-items: center;
-      padding: 10px 20px;
-    }
-    .menu, .bookmark-btn {
-      background-color: #EBEDDF;
-      padding: 10px;
-      border: none;
-      cursor: pointer;
-      font-weight: bold;
-    }
-    .search-input {
-      width: 40%;
-      padding: 10px;
-      border-radius: 5px;
-      border: 1px solid #ccc;
-    }
-    .container {
-      max-width: 900px;
-      margin: 0 auto;
-      padding: 20px;
-    }
-    .content-box {
-      background-color: #EBEDDF;
-      margin-bottom: 20px;
-      padding: 20px;
-      border-radius: 10px;
-      cursor: pointer;
-      overflow: hidden;
-      transition: all 0.5s ease;
-    }
-    .content-header {
-      display: flex;
-      justify-content: space-between;
-      align-items: center;
-      font-weight: bold;
-      font-size: 1.2rem;
-    }
-    .bookmark-icon {
-      background: none;
-      border: none;
-      font-size: 1.2rem;
-      cursor: pointer;
-      color: gray;
-    }
-    .bookmark-icon.active {
-      color: black;
-    }
-    .content-body {
-      max-height: 0;
-      overflow: hidden;
-      transition: max-height 0.5s ease;
-    }
-    .content-box.open .content-body {
-      max-height: 2000px;
-    }
-    .poll {
-      text-align: center;
-      margin: 20px 0;
-    }
-  </style>
+  <link rel="stylesheet" href="style.css" />
 </head>
 <body>
-  <header>$NAPDOLLAR</header>  <div class="top-bar">
-    <button class="menu">Menu</button>
-    <input type="text" class="search-input" placeholder="Search topics..." />
-    <button class="bookmark-btn">View Bookmarks</button>
-  </div>  <div class="container" id="contentContainer">
-    <!-- Content will be dynamically loaded here -->
-  </div>  <script>
-    const contentFiles = ["day1.html", "day2.html"];
-    const container = document.getElementById("contentContainer");
-    const bookmarks = [];
+  <header>
+    <h1 class="site-title">$NAPDOLLAR</h1>
+    <div class="top-bar">
+      <button id="menu-button">☰</button>
+      <input type="text" id="search-bar" placeholder="Search...">
+      <button id="view-bookmarks">View Bookmarks</button>
+    </div>
+  </header>
 
-    function createContentBox(title, bodyContent, filename) {
-      const box = document.createElement("div");
-      box.className = "content-box";
+  <main id="content-area">
+    <!-- Day 1 -->
+    <div class="content-box" onclick="toggleContent(this)">
+      <div class="content-header">
+        <h2>How to Start a Business from Zero</h2>
+        <button class="bookmark-btn" onclick="toggleBookmark(this, event)">🔖</button>
+      </div>
+      <div class="content-body">
+        <ul>
+          <li><strong>Find a Problem to Solve</strong><br>Look around—what do people need or struggle with? Your solution = your business.</li>
+          <li><strong>Validate Your Idea</strong><br>Talk to potential customers. Ask: Would you pay for this? Start small—test before going all in.</li>
+          <li><strong>Make a Simple Plan</strong><br>What are you selling? Who are you selling to? How will you make money? What are your startup costs?</li>
+          <li><strong>Choose a Business Name & Identity</strong><br>Pick a name that’s easy to remember. Get a logo, brand colors, and a basic online presence (website or Instagram page).</li>
+          <li><strong>Register Your Business</strong><br>Choose your structure (sole proprietorship, LLC, etc.). Get necessary licenses, tax IDs, or permits.</li>
+          <li><strong>Set Up Finances</strong><br>Open a separate business bank account. Use tools to track income/expenses.</li>
+          <li><strong>Start Selling</strong><br>Use social media, word of mouth, online platforms. Offer real value, not just hype.</li>
+          <li><strong>Keep Improving</strong><br>Collect feedback. Tweak your product. Stay consistent.</li>
+        </ul>
+        <div class="conclusion">Tip: Don’t wait to be perfect. Start small. Learn fast. Grow smart.</div>
+      </div>
+    </div>
 
-      const header = document.createElement("div");
-      header.className = "content-header";
-      header.innerHTML = `<span>${title}</span>`;
+    <!-- Strawpoll -->
+    <iframe src="https://strawpoll.com/Q0Zp7Od6GgM" class="poll-frame" frameborder="0" allowfullscreen></iframe>
 
-      const bookmarkBtn = document.createElement("button");
-      bookmarkBtn.className = "bookmark-icon";
-      bookmarkBtn.textContent = "★";
+    <!-- Day 2 -->
+    <div class="content-box" onclick="toggleContent(this)">
+      <div class="content-header">
+        <h2>Loan Advice from Millionaires</h2>
+        <button class="bookmark-btn" onclick="toggleBookmark(this, event)">🔖</button>
+      </div>
+      <div class="content-body">
+        <ul>
+          <li>Debt is a tool. Use it to build, not to consume.</li>
+          <li>If the loan doesn’t create income, you’re paying to get poorer.</li>
+          <li>Let borrowed money work harder than your own money.</li>
+          <li>Leverage helps the rich grow—but only with discipline.</li>
+          <li>Don’t take a loan to look rich—take it to get rich.</li>
+          <li>Business loans are for multiplying, not spending.</li>
+          <li>Good debt puts money in; bad debt takes it out.</li>
+          <li>Borrow for machines, not for mansions.</li>
+          <li>Poor use loans to survive. Rich use them to scale.</li>
+          <li>Every borrowed rupee must earn more than its interest.</li>
+          <li>If your loan builds income, it’s an investment. Else, it’s a trap.</li>
+          <li>The smartest loan replaces your time with systems.</li>
+          <li>Don’t fear debt. Fear misusing it.</li>
+        </ul>
+        <div class="conclusion">In nutshell: Credit is power—only if you use it with a plan.</div>
+      </div>
+    </div>
+  </main>
 
-      bookmarkBtn.addEventListener("click", (e) => {
-        e.stopPropagation();
-        bookmarkBtn.classList.toggle("active");
-        if (bookmarkBtn.classList.contains("active")) {
-          bookmarks.push(box.cloneNode(true));
-        }
-      });
-
-      header.appendChild(bookmarkBtn);
-
-      const body = document.createElement("div");
-      body.className = "content-body";
-      body.innerHTML = bodyContent;
-
-      box.appendChild(header);
-      box.appendChild(body);
-
-      box.addEventListener("click", () => {
-        box.classList.toggle("open");
-      });
-
-      return box;
-    }
-
-    contentFiles.forEach((file, index) => {
-      fetch(`content/${file}`)
-        .then(res => res.text())
-        .then(data => {
-          const title = data.split("\n")[0].replace(/<[^>]*>/g, "").trim();
-          const contentBox = createContentBox(title, data, file);
-          container.appendChild(contentBox);
-
-          if (index < contentFiles.length - 1) {
-            const poll = document.createElement("div");
-            poll.className = "poll";
-            poll.innerHTML = `
-              <iframe src="https://strawpoll.com/embed/Q0Zp7Od6GgM" style="width: 100%; height: 400px; border: none;">Loading poll...</iframe>
-            `;
-            container.appendChild(poll);
-          }
-        });
-    });
-  </script></body>
+  <script src="script.js"></script>
+</body>
 </html>
