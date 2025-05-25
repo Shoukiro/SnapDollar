@@ -7,48 +7,35 @@
   <link rel="stylesheet" href="style.css" />
 </head>
 <body>
+  <!-- Title at the top -->
+  <h1 style="color: #EBEDDF; text-align: center; font-size: 2em; margin-top: 10px;">$NAPDOLLAR</h1>
 
-  <!-- Header -->
-  <header>
-    <div class="menu">☰</div>
-    <h1 class="site-name">$NAPDOLLAR</h1>
-    <input type="text" id="searchBar" placeholder="Search topics..." />
-    <button onclick="viewBookmarks()">View Bookmarks</button>
-  </header>
+  <!-- Top bar -->
+  <div class="top-bar">
+    <button id="menu-btn">☰</button>
+    <input type="text" id="search-bar" placeholder="Search topics..." />
+    <button id="view-bookmarks-btn">View Bookmarks</button>
+  </div>
 
-  <!-- Content Container -->
+  <!-- Menu bar -->
+  <div id="menu" class="menu hidden">
+    <ul>
+      <li><a href="#">Privacy Policy</a></li>
+      <li><a href="#">Contact</a></li>
+      <li><a href="#">About</a></li>
+      <li><a href="#">Terms & Conditions</a></li>
+    </ul>
+  </div>
+
+  <!-- Bookmarks view -->
+  <div id="bookmarks-container" class="hidden"></div>
+
+  <!-- Content section -->
   <div id="content-container">
-
-    <!-- Example Topic Box -->
-    <div class="content-box" id="topic1">
-      <h2>How to Start a Small Bakery</h2>
-      <button onclick="toggleBookmark('topic1', this)">Add to Bookmark</button>
-      <p>Steps to start your own bakery:</p>
-      <ul>
-        <li>Choose a good location</li>
-        <li>Plan your menu</li>
-        <li>Get licenses</li>
-        <li>Market your brand</li>
-      </ul>
-      <div class="conclusion">Conclusion: Starting small with clear branding is key to growth.</div>
-    </div>
-
-    <!-- Strawpoll -->
-    <div class="poll">
-      <iframe src="https://strawpoll.com/embed/Q0Zp7Od6GgM" style="width:100%; height:500px;" frameborder="0"></iframe>
-    </div>
-
-    <!-- Additional topics will go here -->
-
+    <!-- Content boxes will be dynamically inserted here by JavaScript -->
   </div>
 
-  <!-- Bookmark Modal -->
-  <div id="bookmarkModal" class="modal hidden">
-    <h3>Bookmarked Topics</h3>
-    <ul id="bookmarkList"></ul>
-    <button onclick="closeModal()">Close</button>
-  </div>
-
+  <!-- Script -->
   <script src="script.js"></script>
 </body>
 </html>
