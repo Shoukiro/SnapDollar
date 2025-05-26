@@ -1,46 +1,46 @@
-/* style.css */ 
-body { 
-  margin: 0; 
-  font-family: Arial, sans-serif; 
-  background: linear-gradient(to bottom, #75485E, #51A3A3); 
-  color: #000; 
+/* ===== Core Styles ===== */
+body {
+  margin: 0;
+  font-family: Arial, sans-serif;
+  background: linear-gradient(to bottom, #75485E, #51A3A3);
+  color: #000;
 }
 
-header { 
-  padding: 10px; 
-  background: transparent; 
-  text-align: center; 
+header {
+  padding: 10px;
+  background: transparent;
+  text-align: center;
 }
 
-.site-title { 
-  color: #EBEDDF; 
-  margin-bottom: 10px; 
-  font-size: 2em; 
+.site-title {
+  color: #EBEDDF;
+  margin-bottom: 10px;
+  font-size: 2em;
 }
 
-.top-bar { 
-  display: flex; 
-  justify-content: space-between; 
-  align-items: center; 
-  padding: 0 20px; 
+.top-bar {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 0 20px;
 }
 
-#search-input { 
-  flex: 1; 
-  margin: 0 10px; 
-  padding: 8px; 
-  border-radius: 5px; 
-  border: none; 
+#search-input {
+  flex: 1;
+  margin: 0 10px;
+  padding: 8px;
+  border-radius: 5px;
+  border: none;
 }
 
-button { 
-  padding: 8px 12px; 
-  border: none; 
-  border-radius: 5px; 
-  cursor: pointer; 
+button {
+  padding: 8px 12px;
+  border: none;
+  border-radius: 5px;
+  cursor: pointer;
 }
 
-/* Menu Styles */
+/* ===== Menu Styles ===== */
 #menu {
   display: none;
   position: absolute;
@@ -71,69 +71,82 @@ button {
   background-color: #ddd;
 }
 
-/* Content Styles */
-main { 
-  padding: 20px; 
+/* ===== Content Box Styles ===== */
+.content-box {
+  background-color: #EBEDDF;
+  border-radius: 10px;
+  padding: 15px;
+  margin-bottom: 20px;
+  transition: max-height 0.5s ease, padding 0.5s ease;
+  overflow: hidden;
+  max-height: 60px;
+  cursor: pointer;
 }
 
-.content-box { 
-  background-color: #EBEDDF; 
-  border-radius: 10px; 
-  padding: 15px; 
-  margin-bottom: 20px; 
-  transition: max-height 0.5s ease, padding 0.5s ease; 
-  overflow: hidden; 
-  max-height: 60px; 
-  cursor: pointer; 
+.content-box.expanded {
+  max-height: 2000px;
+  padding: 15px;
 }
 
-.content-box.expanded { 
-  max-height: 2000px; 
-  padding: 15px; 
+.content-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
 }
 
-.content-header { 
-  display: flex; 
-  justify-content: space-between; 
-  align-items: center; 
+.bookmark-btn {
+  background: none;
+  font-size: 1.2em;
+  cursor: pointer;
 }
 
-.bookmark-btn { 
-  background: none; 
-  font-size: 1.2em; 
+.bookmarked {
+  color: gold;
+  text-shadow: 0 0 3px rgba(0,0,0,0.3);
 }
 
-.bookmarked { 
-  color: black; 
+.content-body {
+  display: none;
+  margin-top: 15px;
 }
 
-.content-body { 
-  display: none; 
-  margin-top: 15px; 
+.content-box.expanded .content-body {
+  display: block;
 }
 
-.content-box.expanded .content-body { 
-  display: block; 
-}
-
-.conclusion { 
-  margin-top: 15px; 
-  font-weight: bold; 
-}
-
-.poll-link { 
-  margin: 20px 0; 
-  text-align: center; 
-}
-
-.poll-link a {
-  color: #EBEDDF;
-  text-decoration: none;
+.conclusion {
+  margin-top: 15px;
   font-weight: bold;
 }
+
+/* ===== Poll Styles ===== */
 .poll-embed {
   margin: 20px 0;
   background: #EBEDDF;
   border-radius: 10px;
   overflow: hidden;
+}
+
+.poll-embed iframe {
+  display: block;
+  width: 100%;
+  height: 400px;
+  border: none;
+}
+
+/* ===== Responsive Adjustments ===== */
+@media (max-width: 600px) {
+  .top-bar {
+    flex-direction: column;
+    gap: 10px;
+  }
+  
+  #search-input {
+    width: 100%;
+    margin: 5px 0;
+  }
+  
+  .content-box {
+    max-height: 80px;
+  }
 }
