@@ -1,22 +1,30 @@
-// script.js
-document.addEventListener("DOMContentLoaded", function () {
+// Auto-load content and polls
+async function loadAllContent() {
+  const contentOrder = [
+    { type: 'content', file: 'day1.html' },
+    { type: 'poll', file: 'poll1.html' },
+    { type: 'content', file: 'day2.html' },
+    { type: 'poll', file: 'poll2.html' }
+    // Add new items here as needed
+  ];
+
+  const main = document.getElementById('content');
+  
+  for (const item of contentOrder) {
+    const response = await fetch(`/${item.type}s/${item.file}`);
+    const html = await response.text();
+    main.innerHTML += html;
+  }
+  
+  // Initialize your existing functionality
+  initContentBoxes();
+}
+
+function initContentBoxes() {
   const boxes = document.querySelectorAll(".content-box");
   const bookmarks = JSON.parse(localStorage.getItem("bookmarks")) || [];
   const bookmarkBtnMap = new Map();
 
-  // Menu toggle functionality
-  document.getElementById("menu-toggle").addEventListener("click", function(e) {
-    e.stopPropagation();
-    const menu = document.getElementById("menu");
-    menu.style.display = menu.style.display === "block" ? "none" : "block";
-  });
-
-  // Close menu when clicking outside
-  document.addEventListener("click", function() {
-    document.getElementById("menu").style.display = "none";
-  });
-
-  // Existing content box functionality
   boxes.forEach((box, index) => {
     const header = box.querySelector(".content-header");
     const bookmarkBtn = box.querySelector(".bookmark-btn");
@@ -46,23 +54,7 @@ document.addEventListener("DOMContentLoaded", function () {
     });
   });
 
-  document.getElementById("view-bookmarks").addEventListener("click", () => {
-    const main = document.querySelector("main");
-    main.innerHTML = "";
-    bookmarks.forEach(topic => {
-      main.innerHTML += bookmarkBtnMap.get(topic) || "";
-    });
-  });
+  // [Keep all your other existing event listeners]
+}
 
-  document.getElementById("search-input").addEventListener("input", function () {
-    const value = this.value.toLowerCase();
-    boxes.forEach((box) => {
-      const topic = box.dataset.topic.toLowerCase();
-      if (topic.includes(value)) {
-        box.style.display = "block";
-      } else {
-        box.style.display = "none";
-      }
-    });
-  });
-});
+document.addEventListener("DOMContentLoaded", loadAllContent);
