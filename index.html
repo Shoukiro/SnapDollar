@@ -7,10 +7,26 @@
   <link rel="stylesheet" href="style.css" />
 </head>
 <body>
-  <!-- [Keep ALL your existing header/nav exactly as is] -->
+  <header>
+    <h1 class="site-title">$NAPDOLLAR</h1>
+    <div class="top-bar">
+      <button id="menu-toggle">☰</button>
+      <input type="text" id="search-input" placeholder="Search topics..." />
+      <button id="view-bookmarks">View Bookmarks</button>
+    </div>
+  </header>
+  
+  <nav id="menu">
+    <ul>
+      <li><a href="#">Privacy Policy</a></li>
+      <li><a href="#">Contact</a></li>
+      <li><a href="#">About</a></li>
+      <li><a href="#">Terms & Conditions</a></li>
+    </ul>
+  </nav>
 
   <main id="content">
-    <!-- Content will be auto-loaded here -->
+    <!-- Content loads here automatically -->
   </main>
 
   <script src="script.js"></script>
