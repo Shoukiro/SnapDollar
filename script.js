@@ -1,4 +1,4 @@
-// Enhanced Auto-loader for root-level folders
+// ===== Auto-Loader System =====
 async function loadContent() {
   const loadOrder = [
     { path: 'content/day1.html' },  // First content box
@@ -9,9 +9,11 @@ async function loadContent() {
 
   const main = document.getElementById('content');
   
-  // Clear existing content (safety measure)
+  // Clear container and hide during load
   main.innerHTML = '';
+  main.style.opacity = 0;
 
+  // Load all content in sequence
   for (const item of loadOrder) {
     try {
       const response = await fetch(item.path);
@@ -26,41 +28,56 @@ async function loadContent() {
     }
   }
   
-  // Initialize your original features
+  // Initialize all interactive features
   initOriginalFeatures();
+  
+  // Smooth fade-in when ready
+  setTimeout(() => {
+    main.style.opacity = 1;
+  }, 50);
 }
 
-// Your original functions (MUST include these)
+// ===== Original Functionality =====
 function initOriginalFeatures() {
-  // 1. Menu toggle functionality
+  // 1. Menu Toggle
   document.getElementById("menu-toggle").addEventListener("click", function(e) {
     e.stopPropagation();
     const menu = document.getElementById("menu");
     menu.style.display = menu.style.display === "block" ? "none" : "block";
   });
 
-  // 2. Content boxes functionality
+  // Close menu when clicking outside
+  document.addEventListener("click", function() {
+    document.getElementById("menu").style.display = "none";
+  });
+
+  // 2. Content Boxes Functionality
   const boxes = document.querySelectorAll(".content-box");
   const bookmarks = JSON.parse(localStorage.getItem("bookmarks")) || [];
-  
+  const bookmarkBtnMap = new Map();
+
   boxes.forEach((box) => {
     const header = box.querySelector(".content-header");
     const bookmarkBtn = box.querySelector(".bookmark-btn");
     const topic = box.dataset.topic;
 
-    // Bookmark logic
+    // Initialize bookmarks
+    bookmarkBtnMap.set(topic, box.outerHTML);
     if (bookmarks.includes(topic)) {
       bookmarkBtn.classList.add("bookmarked");
     }
 
+    // Toggle expansion
     header.addEventListener("click", () => {
       box.classList.toggle("expanded");
     });
 
+    // Bookmark toggle
     bookmarkBtn.addEventListener("click", (e) => {
       e.stopPropagation();
-      if (bookmarks.includes(topic)) {
-        bookmarks.splice(bookmarks.indexOf(topic), 1);
+      const index = bookmarks.indexOf(topic);
+      if (index > -1) {
+        bookmarks.splice(index, 1);
         bookmarkBtn.classList.remove("bookmarked");
       } else {
         bookmarks.push(topic);
@@ -70,7 +87,7 @@ function initOriginalFeatures() {
     });
   });
 
-  // 3. Search functionality
+  // 3. Search Functionality
   document.getElementById("search-input").addEventListener("input", function() {
     const value = this.value.toLowerCase();
     boxes.forEach((box) => {
@@ -80,11 +97,15 @@ function initOriginalFeatures() {
     });
   });
 
-  // 4. View bookmarks
+  // 4. View Bookmarks
   document.getElementById("view-bookmarks").addEventListener("click", () => {
-    // [Your existing bookmark view logic]
+    const main = document.getElementById("content");
+    main.innerHTML = "";
+    bookmarks.forEach(topic => {
+      main.innerHTML += bookmarkBtnMap.get(topic) || "";
+    });
   });
 }
 
-// Start the loader
+// ===== Start Application =====
 document.addEventListener("DOMContentLoaded", loadContent);
