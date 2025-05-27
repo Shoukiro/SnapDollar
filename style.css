@@ -46,6 +46,24 @@ button {
   cursor: pointer;
 }
 
+/* ===== Star Icon Button ===== */
+.star-icon-btn {
+  font-size: 1.5em;
+  background: none;
+  border: none;
+  padding: 0 12px;
+  line-height: 1;
+  cursor: pointer;
+  color: #EBEDDF;
+  transition: all 0.2s ease;
+}
+
+.star-icon-btn:hover {
+  color: gold;
+  transform: scale(1.1);
+  text-shadow: 0 0 5px rgba(255,215,0,0.5);
+}
+
 /* ===== Menu Styles ===== */
 #menu {
   display: none;
@@ -154,5 +172,10 @@ button {
   
   .content-box {
     max-height: 80px;
+  }
+
+  .star-icon-btn {
+    padding: 5px 10px;
+    font-size: 1.3em;
   }
 }
