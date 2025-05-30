@@ -102,18 +102,57 @@ function initOriginalFeatures() {
   
   // 4. View Bookmarks  
 let showingBookmarks = false;
+const viewBtn = document.getElementById("view-bookmarks");
 
-document.getElementById("view-bookmarks").addEventListener("click", async () => {
+viewBtn.addEventListener("click", async () => {
   const main = document.getElementById("content");
+
   if (showingBookmarks) {
-    await loadContent();
     showingBookmarks = false;
+    viewBtn.classList.remove("bookmarked");
+    viewBtn.innerHTML = "☆";
+
+    // Clear old content completely and reload fresh
+    await loadContent(); // This resets everything
   } else {
+    showingBookmarks = true;
+    viewBtn.classList.add("bookmarked");
+    viewBtn.innerHTML = "★";
+
+    // Clear content and show only bookmarks
     main.innerHTML = "";
     bookmarks.forEach(topic => {
       main.innerHTML += bookmarkBtnMap.get(topic) || "";
     });
-    showingBookmarks = true;
+
+    // Reinitialize content box behavior ONLY (without duplicating listeners)
+    const boxes = document.querySelectorAll(".content-box");
+    boxes.forEach((box) => {
+      const header = box.querySelector(".content-header");
+      const bookmarkBtn = box.querySelector(".bookmark-btn");
+      const topic = box.dataset.topic;
+
+      // Toggle expansion
+      header.addEventListener("click", () => {
+        box.classList.toggle("expanded");
+      });
+
+      // Bookmark toggle
+      bookmarkBtn.addEventListener("click", (e) => {
+        e.stopPropagation();
+        const index = bookmarks.indexOf(topic);
+        if (index > -1) {
+          bookmarks.splice(index, 1);
+          bookmarkBtn.classList.remove("bookmarked");
+          bookmarkBtn.innerHTML = "☆";
+        } else {
+          bookmarks.push(topic);
+          bookmarkBtn.classList.add("bookmarked");
+          bookmarkBtn.innerHTML = "★";
+        }
+        localStorage.setItem("bookmarks", JSON.stringify(bookmarks));
+      });
+    });
   }
 });  
 }  
