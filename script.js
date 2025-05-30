@@ -101,13 +101,21 @@ function initOriginalFeatures() {
   });  
   
   // 4. View Bookmarks  
-  document.getElementById("view-bookmarks").addEventListener("click", () => {  
-    const main = document.getElementById("content");  
-    main.innerHTML = "";  
-    bookmarks.forEach(topic => {  
-      main.innerHTML += bookmarkBtnMap.get(topic) || "";  
-    });  
-  });  
+let showingBookmarks = false;
+
+document.getElementById("view-bookmarks").addEventListener("click", async () => {
+  const main = document.getElementById("content");
+  if (showingBookmarks) {
+    await loadContent();
+    showingBookmarks = false;
+  } else {
+    main.innerHTML = "";
+    bookmarks.forEach(topic => {
+      main.innerHTML += bookmarkBtnMap.get(topic) || "";
+    });
+    showingBookmarks = true;
+  }
+});  
 }  
   
 // ===== Start Application =====  
