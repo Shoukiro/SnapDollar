@@ -51,17 +51,18 @@ function initOriginalFeatures() {
   bookmarkBtnMap.clear();  
   
   boxes.forEach((box) => {  
-    const header = box.querySelector(".content-header");  
     const bookmarkBtn = box.querySelector(".bookmark-btn");  
     const topic = box.dataset.topic;  
   
     bookmarkBtnMap.set(topic, box.outerHTML);  
     bookmarkBtn.innerHTML = bookmarks.includes(topic) ? "★" : "☆";  
   
-    header.addEventListener("click", () => {  
-      box.classList.toggle("expanded");  
-    });  
-  
+    box.addEventListener("click", (e) => {
+      // Prevent toggle if clicking on the bookmark button
+      if (e.target.classList.contains("bookmark-btn")) return;
+      box.classList.toggle("expanded");
+    });
+
     bookmarkBtn.addEventListener("click", (e) => {  
       e.stopPropagation();  
       const index = bookmarks.indexOf(topic);  
@@ -114,11 +115,11 @@ document.addEventListener("DOMContentLoaded", () => {
       // Reattach only essential content box listeners
       const boxes = document.querySelectorAll(".content-box");
       boxes.forEach((box) => {
-        const header = box.querySelector(".content-header");
         const bookmarkBtn = box.querySelector(".bookmark-btn");
         const topic = box.dataset.topic;
 
-        header.addEventListener("click", () => {
+        box.addEventListener("click", (e) => {
+          if (e.target.classList.contains("bookmark-btn")) return;
           box.classList.toggle("expanded");
         });
 
