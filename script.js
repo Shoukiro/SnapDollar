@@ -4,7 +4,8 @@ async function loadContent() {
     { path: 'content/day1.html' },  
     { path: 'polls/poll1.html' },  
     { path: 'content/day2.html' },  
-    { path: 'polls/poll2.html' }  
+    { path: 'polls/poll2.html' },
+    { path: 'content/day3.html' }
   ];  
   
   const main = document.getElementById('content');  
