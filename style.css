@@ -177,3 +177,7 @@ button {
     font-size: 1.3em;
   }
 }
+
+*:focus:not(:focus-visible) {
+  outline: none;
+}
