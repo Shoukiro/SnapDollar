@@ -97,19 +97,16 @@ button {
 
 /* ===== Content Box Styles ===== */
 .content-box {
-  background-color: #EBEDDF;
-  border-radius: 10px;
-  padding: 15px;
-  margin-bottom: 20px;
-  transition: max-height 0.5s ease, padding 0.5s ease;
-  overflow: hidden;
   max-height: 60px;
+  overflow: hidden;
+  transition: max-height 0.4s ease, padding 0.3s ease;
   cursor: pointer;
+  padding: 10px;
 }
 
 .content-box.expanded {
-  max-height: 2000px;
-  padding: 15px;
+  max-height: 1000px; /* Enough to fit full content */
+  padding: 20px;
 }
 
 .content-header {
