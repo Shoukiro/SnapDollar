@@ -99,7 +99,7 @@ button {
 .content-box {
   max-height: 60px;
   overflow: hidden;
-  transition: max-height 0.6s ease, padding 0.6s ease;
+  transition: max-height 0.4s ease, padding 0.3s ease;
   cursor: pointer;
   padding: 10px;
 }
