@@ -102,6 +102,7 @@ button {
   transition: max-height 0.4s ease, padding 0.3s ease;
   cursor: pointer;
   padding: 10px;
+  background: #EBEDDF; /* ✅ Added for visibility */
 }
 
 .content-box.expanded {
@@ -161,12 +162,12 @@ button {
     flex-direction: column;
     gap: 10px;
   }
-  
+
   #search-input {
     width: 100%;
     margin: 5px 0;
   }
-  
+
   .content-box {
     max-height: 80px;
   }
