@@ -1,3 +1,9 @@
+function shuffleArray(array) {
+  for (let i = array.length - 1; i > 0; i--) {
+    const j = Math.floor(Math.random() * (i + 1));
+    [array[i], array[j]] = [array[j], array[i]];
+  }
+}
 // ===== Auto-Loader System =====  
 async function loadContent() {  
   const loadOrder = [  
@@ -7,7 +13,7 @@ async function loadContent() {
     { path: 'polls/poll2.html' },
     { path: 'content/day3.html' }
   ];  
-  
+  shuffleArray(loadOrder);
   const main = document.getElementById('content');  
   main.innerHTML = '';  
   main.style.opacity = 0;  
