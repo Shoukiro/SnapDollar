@@ -5,35 +5,50 @@ function shuffleArray(array) {
   }
 }
 // ===== Auto-Loader System =====  
-async function loadContent() {  
-  const loadOrder = [  
-    { path: 'content/day1.html' },  
-    { path: 'polls/poll1.html' },  
-    { path: 'content/day2.html' },  
-    { path: 'polls/poll2.html' },
+async function loadContent() {
+  const contentPaths = [
+    { path: 'content/day1.html' },
+    { path: 'content/day2.html' },
     { path: 'content/day3.html' }
-  ];  
-  shuffleArray(loadOrder);
-  const main = document.getElementById('content');  
-  main.innerHTML = '';  
-  main.style.opacity = 0;  
-  
-  for (const item of loadOrder) {  
-    try {  
-      const response = await fetch(item.path);  
-      if (!response.ok) continue;  
-      const html = await response.text();  
-      main.innerHTML += html;  
-    } catch (e) {  
-      console.error(`Error loading ${item.path}:`, e);  
-    }  
-  }  
-  
-  initOriginalFeatures();  
-  
-  setTimeout(() => {  
-    main.style.opacity = 1;  
-  }, 50);  
+  ];
+
+  const pollPaths = [
+    { path: 'polls/poll1.html' },
+    { path: 'polls/poll2.html' }
+  ];
+
+  // Shuffle both arrays
+  shuffleArray(contentPaths);
+  shuffleArray(pollPaths);
+
+  // Alternate content → poll → content → poll → ...
+  const loadOrder = [];
+  const maxLen = Math.max(contentPaths.length, pollPaths.length);
+  for (let i = 0; i < maxLen; i++) {
+    if (i < contentPaths.length) loadOrder.push(contentPaths[i]);
+    if (i < pollPaths.length) loadOrder.push(pollPaths[i]);
+  }
+
+  const main = document.getElementById('content');
+  main.innerHTML = '';
+  main.style.opacity = 0;
+
+  for (const item of loadOrder) {
+    try {
+      const response = await fetch(item.path);
+      if (!response.ok) continue;
+      const html = await response.text();
+      main.innerHTML += html;
+    } catch (e) {
+      console.error(`Error loading ${item.path}:`, e);
+    }
+  }
+
+  initOriginalFeatures();
+
+  setTimeout(() => {
+    main.style.opacity = 1;
+  }, 50);
 }  
 
 // ===== Bookmark Globals =====
